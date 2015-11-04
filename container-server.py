@@ -68,10 +68,15 @@ def images_index():
 def containers_show(id):
     """
     Inspect specific container
-
+    
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/
+    
     """
-
-    resp = ''
+    if request.args.get('state') == 'running':
+        output = docker('inspect')
+    else:
+        output = docker('inspect', id)
+    resp = '{"id": "%s"}' % id
 
     return Response(response=resp, mimetype="application/json")
 
