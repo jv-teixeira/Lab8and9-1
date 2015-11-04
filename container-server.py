@@ -45,8 +45,7 @@ def containers_index():
         output = docker('ps')
     else:
         output = docker('ps', '-a')
-        resp = json.dumps(docker_ps_to_array(output))
-    resp = ''
+    resp = json.dumps(docker_ps_to_array(output))
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/images', methods=['GET'])
