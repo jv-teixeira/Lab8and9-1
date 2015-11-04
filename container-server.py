@@ -51,12 +51,17 @@ def containers_index():
 @app.route('/images', methods=['GET'])
 def images_index():
     """
-    List all images 
-    
-    Complete the code below generating a valid response. 
+    List all images
+ 
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
+
     """
-    
-    resp = ''
+    if request.args.get('state') == 'running':
+        output = docker('images')
+    else:
+        output = docker('images', '-a')
+    resp = json.dumps(docker_images_to_array(output))
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/containers/<id>', methods=['GET'])
