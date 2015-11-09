@@ -86,7 +86,13 @@ def containers_log(id):
     Dump specific container logs
 
     """
-    resp = ''
+
+    if request.ars.get('state') = 'running':
+	output = docker('logs', id)
+    else:
+	output = docker('logs', id)
+    resp = '{logs: %s}' % logs
+
     return Response(response=resp, mimetype="application/json")
 
 
