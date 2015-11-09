@@ -87,14 +87,13 @@ def containers_log(id):
 
     """
 
-    if request.ars.get('state') = 'running':
-	output = docker('logs', id)
+    iif request.args.get('state') == 'running':
+        output = docker('logs',id)
     else:
-	output = docker('logs', id)
-    resp = '{logs: %s}' % logs
-
+        output = docker('logs',id)
+    resp = json.dumps(docker_logs_to_object(id,output))
+    
     return Response(response=resp, mimetype="application/json")
-
 
 @app.route('/images/<id>', methods=['DELETE'])
 def images_remove(id):
