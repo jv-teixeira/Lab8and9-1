@@ -37,7 +37,7 @@ def containers_index():
     """
     List all containers
  
-    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.toolv
     curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
 
     """
@@ -69,7 +69,7 @@ def containers_show(id):
     """
     Inspect specific container
     
-    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/
+    curl -s -X GET$ -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool 
     
     """
     if request.args.get('state') == 'running':
@@ -99,7 +99,9 @@ def containers_log(id):
 def images_remove(id):
     """
     Delete a specific image
-        curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/imgID/
+
+    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/<imgID> | python -mjson.tool
+
     """
     docker ('rmi', id)
     resp = '{"id": "%s"}' % id
@@ -109,7 +111,9 @@ def images_remove(id):
 def containers_remove(id):
     """
     Delete a specific container - must be already stopped/killed
-    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/contID/
+
+    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<contID> | python -mjson.tool
+
     """
     docker ('rm', id)
     resp = '{"id": "%s"}' % id    
@@ -119,7 +123,9 @@ def containers_remove(id):
 def containers_remove_all():
     """
     Force remove all containers - dangrous!
-        curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel/
+
+    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel | python -mjson.tool
+
     """
     all = docker_ps_to_array(docker('ps', '-a'))
     for i in all:
@@ -131,7 +137,9 @@ def containers_remove_all():
 def images_remove_all():
     """
     Force remove all images - dangrous!
-        curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/imagesDel/
+
+    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/imagesDel | python -mjson.tool
+
     """
     all = docker_images_to_array(docker('images'))
     for i in all:
@@ -144,9 +152,9 @@ def containers_create():
     """
     Create container (from existing image using id or name)
 
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "my-app"}'
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "b14752a6590e"}'
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "b14752a6590e","publish":"8081:22"}'
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "my-app"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "b14752a6590e"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "b14752a6590e","publish":"8081:22"}' | python -mjson.tool
 
     """
     body = request.get_json(force=True)
@@ -161,7 +169,7 @@ def images_create():
     """
     Create image (from uploaded Dockerfile)
 
-    curl -H 'Accept: application/json' -F file=@Dockerfile http://localhost:8080/images
+    curl -H 'Accept: application/json' -F file=@Dockerfile http://localhost:8080/images | python -mjson.tool
 
     """
     dockerfile = request.files['file']
