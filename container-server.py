@@ -121,7 +121,7 @@ def containers_remove_all():
     Force remove all containers - dangrous!
         curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel/
     """
-    docker ('rm (docker ps -a -q)')
+    docker ('rm $(docker ps -a -q)')
     resp = ''
     return Response(response=resp, mimetype="application/json")
 
@@ -131,7 +131,7 @@ def images_remove_all():
     Force remove all images - dangrous!
         curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/imagesDel/
     """
-    docker ('rmi (docker images -q)')
+    docker ('rmi $(docker images -q)')
     resp = ''
     return Response(response=resp, mimetype="application/json")
 
