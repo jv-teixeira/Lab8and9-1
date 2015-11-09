@@ -87,7 +87,7 @@ def containers_log(id):
 
     """
 
-    iif request.args.get('state') == 'running':
+    if request.args.get('state') == 'running':
         output = docker('logs',id)
     else:
         output = docker('logs',id)
