@@ -76,7 +76,7 @@ def containers_show(id):
         output = docker('inspect')
     else:
         output = docker('inspect', id)
-    resp = '{"id": "%s"}' % id
+    resp = json.dumps(docker_logs_to_object(id,output))
 
     return Response(response=resp, mimetype="application/json")
 
