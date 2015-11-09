@@ -99,6 +99,7 @@ def containers_log(id):
 def images_remove(id):
     """
     Delete a specific image
+        curl -s -X DELETE -H 'Accept: application/json' http://snf-35321.vm.okeanos-global.grnet.gr:8080/images/imgID:8080/
     """
     docker ('rmi', id)
     resp = '{"id": "%s"}' % id
@@ -108,30 +109,31 @@ def images_remove(id):
 def containers_remove(id):
     """
     Delete a specific container - must be already stopped/killed
-
+    curl -s -X DELETE -H 'Accept: application/json' http://snf-35321.vm.okeanos-global.grnet.gr:8080/containers/contID:8080/
     """
-    resp = ''
+    docker ('rm', id)
+    resp = '{"id": "%s"}' % id    
     return Response(response=resp, mimetype="application/json")
 
-@app.route('/containers', methods=['DELETE'])
+@app.route('/containersDel', methods=['DELETE'])
 def containers_remove_all():
     """
     Force remove all containers - dangrous!
-
+        curl -s -X DELETE -H 'Accept: application/json' http://snf-35321.vm.okeanos-global.grnet.gr:8080/containersDel:8080/
     """
+    docker ('rm --force `docker ps -qa`')
     resp = ''
     return Response(response=resp, mimetype="application/json")
 
-@app.route('/images', methods=['DELETE'])
+@app.route('/imagesDel', methods=['DELETE'])
 def images_remove_all():
     """
     Force remove all images - dangrous!
-
+        curl -s -X DELETE -H 'Accept: application/json' http://snf-35321.vm.okeanos-global.grnet.gr:8080/imagesDel:8080/
     """
- 
+    docker ('rmi (docker images -q)')
     resp = ''
     return Response(response=resp, mimetype="application/json")
-
 
 @app.route('/containers', methods=['POST'])
 def containers_create():
