@@ -121,7 +121,7 @@ def containers_remove_all():
     Force remove all containers - dangrous!
         curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel/
     """
-    all = docker_ps_to_array(docker('ps -a'))
+    all = docker_ps_to_array(docker('ps', '-a'))
     for i in all:
 	docker('rm', i['id'])
     resp = '{"count": "%d"}' %len(all)
