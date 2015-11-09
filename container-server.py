@@ -190,7 +190,7 @@ def containers_update(id):
     try:
         state = body['state']
         if state == 'running':
-            docker('restart', id)
+            docker('stopped', id)
     except:
         pass
 
@@ -202,10 +202,15 @@ def images_update(id):
     """
     Update image attributes (support: name[:tag])  tag name should be lowercase only
 
-    curl -s -X PATCH -H 'Content-Type: application/json' http://localhost:8080/images/7f2619ed1768 -d '{"tag": "test:1.0"}'
+    curl -s -X PATCH -H 'Content-Type: application/json' http://localhost:8080/images/d7e52e156daf -d '{"tag": "test:1.0"}'
 
     """
-    resp = ''
+    
+    body = request.get_json(force=True)
+    name = body['tag']
+    docker('tag', id, name)
+
+    resp = '{"id": "%s"}' % id
     return Response(response=resp, mimetype="application/json")
 
 
