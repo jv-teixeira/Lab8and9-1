@@ -121,7 +121,7 @@ def containers_remove_all():
     Force remove all containers - dangrous!
         curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel/
     """
-    docker ('rm --force `docker ps -qa`')
+    docker ('rm --force docker ps -a -q`')
     resp = ''
     return Response(response=resp, mimetype="application/json")
 
@@ -164,9 +164,6 @@ def images_create():
     
     resp = ''
     return Response(response=resp, mimetype="application/json")
-
-
-
 
 @app.route('/containers/<id>', methods=['PATCH'])
 def containers_update(id):
