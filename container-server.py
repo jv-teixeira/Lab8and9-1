@@ -121,8 +121,10 @@ def containers_remove_all():
     Force remove all containers - dangrous!
         curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel/
     """
-    docker ('rm $(docker ps -a -q)')
-    resp = ''
+    all = docker_ps_to_array(docker('ps -a'))
+    for i in all:
+	docker('rm', i['id'])
+    resp = '{"count": "%d"}' %len(all)
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/imagesDel', methods=['DELETE'])
@@ -131,8 +133,10 @@ def images_remove_all():
     Force remove all images - dangrous!
         curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/imagesDel/
     """
-    docker ('rmi $(docker images -q)')
-    resp = ''
+    all = docker_images_to_array(docker('images'))
+    for i in all:
+        docker('rmi', i['id'])
+    resp = '{"count": "%d"}' %len(all)
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/containers', methods=['POST'])
