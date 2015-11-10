@@ -160,9 +160,14 @@ def containers_create():
     body = request.get_json(force=True)
     image = body['image']
     args = ('run', '-d')
+    try:		
+       # Optional attributes		
+        publish = body['publish']		
+        args = args + ('-p', publish)		
+    except:		
+        pass
     id = docker(*(args + (image,)))[0:12]
     return Response(response='{"id": "%s"}' % id, mimetype="application/json")
-
 
 @app.route('/images', methods=['POST'])
 def images_create():
