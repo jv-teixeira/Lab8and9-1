@@ -129,7 +129,8 @@ def containers_remove_all():
     """
     all = docker_ps_to_array(docker('ps', '-a'))
     for i in all:
-	docker('rm', i['id'])
+    	docker ('stop',i['id'])
+	docker('rm',' -f', i['id'])
     resp = '{"count": "%d"}' %len(all)
     return Response(response=resp, mimetype="application/json")
 
