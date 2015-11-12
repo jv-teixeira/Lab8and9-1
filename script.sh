@@ -31,7 +31,35 @@ until [ "$selection" = "0" ]; do
 	read selection
 
 	case $selection in
-		1 ) printf "You entered one\n"
+		1  ) 	telnet snf-35216.vm.okeanos-global.grnet.gr 8080 
+			;;
+		2  )   	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool
+			;;
+		3  ) 	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
+			;;
+		4  ) 	
+			;;
+		5  ) 
+			;;
+		6  ) 	
+			;;
+		7  ) 
+			;;
+		8  )
+			;;
+		9  ) 
+			;;
+		10 )
+			;;
+		11 )
+			;;
+		12 )
+			;;
+		13 )
+			;;
+		14 )
+			;;
+		15 )
 			;;
 		99) exit
 			;;

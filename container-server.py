@@ -37,7 +37,7 @@ def containers_index():
     """
     List all containers
  
-    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.toolv
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool
     curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
 
     """
