@@ -154,9 +154,9 @@ def containers_create():
     """
     Create container (from existing image using id or name)
 
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "my-app"}' | python -mjson.tool
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "<imgID>"}' | python -mjson.tool
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "<imgID>","publish":"8081:22"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers -d '{"image": "my-app"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers -d '{"image": "<imgID>"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers -d '{"image": "<imgID>","publish":"8081:22"}' | python -mjson.tool
 
     """
     body = request.get_json(force=True)
