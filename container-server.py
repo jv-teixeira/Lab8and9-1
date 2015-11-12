@@ -37,8 +37,8 @@ def containers_index():
     """
     List all containers
  
-    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool
-    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers?state=running | python -mjson.tool
 
     """
     if request.args.get('state') == 'running':
@@ -53,8 +53,7 @@ def images_index():
     """
     List all images
  
-    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool
-    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
 
     """
     if request.args.get('state') == 'running':
@@ -69,7 +68,7 @@ def containers_show(id):
     """
     Inspect specific container
     
-    curl -s -X GET$ -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool 
+    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<id> | python -mjson.tool 
     
     """
     if request.args.get('state') == 'running':
@@ -84,6 +83,8 @@ def containers_show(id):
 def containers_log(id):
     """
     Dump specific container logs
+    
+    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<id>/logs | python -mjson.tool 
 
     """
 
@@ -175,7 +176,7 @@ def images_create():
     """
     Create image (from uploaded Dockerfile)
 
-    curl -H 'Accept: application/json' -F file=@Dockerfile http://localhost:8080/images | python -mjson.tool
+    curl -H 'Accept: application/json' -F file=@Dockerfile http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
 
     """
     dockerfile = request.files['file']
@@ -189,8 +190,8 @@ def containers_update(id):
     """
     Update container attributes (support: state=running|stopped)
 
-    curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/b6cd8ea512c8 -d '{"state": "running"}'
-    curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/b6cd8ea512c8 -d '{"state": "stopped"}'
+    curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "running"}'
+    curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "stopped"}'
 
     """
     body = request.get_json(force=True)
@@ -209,7 +210,7 @@ def images_update(id):
     """
     Update image attributes (support: name[:tag])  tag name should be lowercase only
 
-    curl -s -X PATCH -H 'Content-Type: application/json' http://localhost:8080/images/d7e52e156daf -d '{"tag": "test:1.0"}'
+    curl -s -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/<id> -d '{"tag": "test:1.0"}'
 
     """
     
