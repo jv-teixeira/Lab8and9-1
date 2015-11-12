@@ -155,8 +155,8 @@ def containers_create():
     Create container (from existing image using id or name)
 
     curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "my-app"}' | python -mjson.tool
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "b14752a6590e"}' | python -mjson.tool
-    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "b14752a6590e","publish":"8081:22"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "<imgID>"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "<imgID>","publish":"8081:22"}' | python -mjson.tool
 
     """
     body = request.get_json(force=True)
