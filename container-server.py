@@ -37,8 +37,8 @@ def containers_index():
     """
     List all containers
  
-    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers | python -mjson.tool
-    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers?state=running | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
 
     """
     if request.args.get('state') == 'running':
@@ -53,7 +53,7 @@ def images_index():
     """
     List all images
  
-    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/images | python -mjson.tool
 
     """
     if request.args.get('state') == 'running':
@@ -68,7 +68,7 @@ def containers_show(id):
     """
     Inspect specific container
     
-    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<id> | python -mjson.tool 
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/<id> | python -mjson.tool 
     
     """
     if request.args.get('state') == 'running':
@@ -84,7 +84,7 @@ def containers_log(id):
     """
     Dump specific container logs
     
-    curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<id>/logs | python -mjson.tool 
+    curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/<id>/logs | python -mjson.tool 
 
     """
 
@@ -101,7 +101,7 @@ def images_remove(id):
     """
     Delete a specific image
 
-    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/<imgID> | python -mjson.tool
+    curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/images/<imgID> | python -mjson.tool
 
     """
     docker ('rmi', id)
@@ -113,7 +113,7 @@ def containers_remove(id):
     """
     Delete a specific container - must be already stopped/killed
 
-    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<contID> | python -mjson.tool
+    curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/containers/<contID> | python -mjson.tool
 
     """
     docker ('rm', id)
@@ -125,7 +125,7 @@ def containers_remove_all():
     """
     Force remove all containers - dangrous!
 
-    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel | python -mjson.tool
+    curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/containersDel | python -mjson.tool
 
     """
     all = docker_ps_to_array(docker('ps', '-a'))
@@ -140,7 +140,7 @@ def images_remove_all():
     """
     Force remove all images - dangrous!
 
-    curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/imagesDel | python -mjson.tool
+    curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/imagesDel | python -mjson.tool
 
     """
     all = docker_images_to_array(docker('images'))
@@ -154,9 +154,9 @@ def containers_create():
     """
     Create container (from existing image using id or name)
 
-    curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers -d '{"image": "my-app"}' | python -mjson.tool
-    curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers -d '{"image": "<imgID>"}' | python -mjson.tool
-    curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers -d '{"image": "<imgID>","publish":"8081:22"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "my-app"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "<imgID>"}' | python -mjson.tool
+    curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "<imgID>","publish":"8081:22"}' | python -mjson.tool
 
     """
     body = request.get_json(force=True)
@@ -176,7 +176,7 @@ def images_create():
     """
     Create image (from uploaded Dockerfile)
 
-    curl -H 'Accept: application/json' -F file=@Dockerfile http://snf-35216.vm.okeanos-global.grnet.gr:8080/images
+    curl -H 'Accept: application/json' -F file=@Dockerfile http://localhost:8080/images
 
     """
     dockerfile = request.files['file']
@@ -188,17 +188,16 @@ def images_create():
 @app.route('/containers/<id>', methods=['PATCH'])
 def containers_update(id):
     """
+    """
     Update container attributes (support: state=running|stopped)
-
-    curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "running"}'
-    curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "stopped"}'
-
+    curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/b6cd8ea512c8 -d '{"state": "running"}'
+    curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/b6cd8ea512c8 -d '{"state": "stopped"}'
     """
     body = request.get_json(force=True)
     try:
         state = body['state']
         if state == 'running':
-            docker('stopped', id)
+            docker('restart', id)
     except:
         pass
 
@@ -210,7 +209,7 @@ def images_update(id):
     """
     Update image attributes (support: name[:tag])  tag name should be lowercase only
 
-    curl -s -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/<id> -d '{"tag": "test:1.0"}'
+    curl -s -X PATCH -H 'Content-Type: application/json' http://localhost:8080/images/<id> -d '{"tag": "test:1.0"}'
 
     """
     
