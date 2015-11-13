@@ -9,7 +9,7 @@ function press_enter {
 
 selection=
 until [ "$selection" = "0" ]; do
-	printf "Select from the menu: \n\n" 
+	printf "\nSelect from the menu: \n\n" 
 	printf "  1) VM Connection Test\n"
 	printf "  2) List all Containers\n"
 	printf "  3) List Running Containers\n"
