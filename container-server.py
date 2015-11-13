@@ -181,8 +181,8 @@ def images_create():
     """
     dockerfile = request.files['file']
     
-    
-    resp = ''
+    docker('build -f ', dockerfile)
+    resp = 'Image created'
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/containers/<id>', methods=['PATCH'])
