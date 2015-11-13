@@ -49,7 +49,7 @@ until [ "$selection" = "0" ]; do
 		6  ) 	curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/containersDel | python -mjson.tool
 			press_enter
 			;;
-		7  ) 	curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "imgID"}' | python -mjson.tool
+		7  ) 	curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "49b7d316bf66"}' | python -mjson.tool
 			press_enter
 			;;
 		8  )	curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/bfe2305d5b31 -d '{"state": "running"}'
