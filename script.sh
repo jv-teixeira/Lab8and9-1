@@ -2,7 +2,7 @@
 
 function press_enter {
 	printf "\n"
-	printf "Press Enter to continue"
+	printf "Press Enter to continue..."
 	read
 	clear
 }
@@ -32,34 +32,49 @@ until [ "$selection" = "0" ]; do
 
 	case $selection in
 		1  ) 	telnet snf-35216.vm.okeanos-global.grnet.gr 8080 
+			press_enter
 			;;
 		2  )   	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers | python -mjson.tool
+			press_enter
 			;;
 		3  ) 	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers?state=running | python -mjson.tool
+			press_enter
 			;;
 		4  ) 	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/id | python -mjson.tool
+			press_enter
 			;;
 		5  ) 	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/contid | python -mjson.tool
+			press_enter
 			;;
 		6  ) 	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel | python -mjson.tool
+			press_enter
 			;;
 		7  ) 	curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080 -d '{"image": "imgID"}' | python -mjson.tool
+			press_enter
 			;;
 		8  )	curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "running"}'
+			press_enter
 			;;
 		9  ) 	curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "stopped"}'
+			press_enter
 			;;
 		10 )	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/id/logs | python -mjson.tool 
+			press_enter
 			;;
 		11 )	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
+			press_enter
 			;;
 		12 )	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/imgID | python -mjson.tool
+			press_enter
 			;;
 		13 )	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel | python -mjson.tool
+			press_enter
 			;;
 		14 )	curl -s -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/id -d '{"tag": "test:1.0"}'
+			press_enter
 			;;
 		15 )	curl -H 'Accept: application/json' -F file=@Dockerfile http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
+			press_enter
 			;;
 		99) exit
 			;;
