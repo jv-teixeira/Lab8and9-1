@@ -33,7 +33,7 @@ until [ "$selection" = "0" ]; do
 	case $selection in
 		1  ) 	telnet snf-35216.vm.okeanos-global.grnet.gr 8080 
 			;;
-		2  )   	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080 | python -mjson.tool
+		2  )   	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers | python -mjson.tool
 			;;
 		3  ) 	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers?state=running | python -mjson.tool
 			;;
