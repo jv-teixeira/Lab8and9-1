@@ -176,13 +176,13 @@ def images_create():
     """
     Create image (from uploaded Dockerfile)
 
-    curl -H 'Accept: application/json' -F file=@Dockerfile http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
+    curl -H 'Accept: application/json' -F file=@Dockerfile http://snf-35216.vm.okeanos-global.grnet.gr:8080/images
 
     """
     dockerfile = request.files['file']
     
-    docker('build -f ', dockerfile)
-    resp = 'Image created'
+    docker('build', dockerfile)
+    resp = ''
     return Response(response=resp, mimetype="application/json")
 
 @app.route('/containers/<id>', methods=['PATCH'])
