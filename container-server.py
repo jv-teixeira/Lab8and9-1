@@ -188,7 +188,6 @@ def images_create():
 @app.route('/containers/<id>', methods=['PATCH'])
 def containers_update(id):
     """
-    """
     Update container attributes (support: state=running|stopped)
     curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/b6cd8ea512c8 -d '{"state": "running"}'
     curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/b6cd8ea512c8 -d '{"state": "stopped"}'
