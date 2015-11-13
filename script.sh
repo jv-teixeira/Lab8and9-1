@@ -40,10 +40,10 @@ until [ "$selection" = "0" ]; do
 		3  ) 	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers?state=running | python -mjson.tool
 			press_enter
 			;;
-		4  ) 	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/5a8f61235b34 | python -mjson.tool
+		4  ) 	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/bfe2305d5b31 | python -mjson.tool
 			press_enter
 			;;
-		5  ) 	curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/containers/5a8f61235b34 | python -mjson.tool
+		5  ) 	curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/containers/bfe2305d5b31 | python -mjson.tool
 			press_enter
 			;;
 		6  ) 	curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/containersDel | python -mjson.tool
@@ -52,13 +52,13 @@ until [ "$selection" = "0" ]; do
 		7  ) 	curl -X POST -H 'Content-Type: application/json' http://localhost:8080/containers -d '{"image": "imgID"}' | python -mjson.tool
 			press_enter
 			;;
-		8  )	curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/5a8f61235b34 -d '{"state": "running"}'
+		8  )	curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/bfe2305d5b31 -d '{"state": "running"}'
 			press_enter
 			;;
-		9  ) 	curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/5a8f61235b34 -d '{"state": "stopped"}'
+		9  ) 	curl -X PATCH -H 'Content-Type: application/json' http://localhost:8080/containers/bfe2305d5b31 -d '{"state": "stopped"}'
 			press_enter
 			;;
-		10 )	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/5a8f61235b34/logs | python -mjson.tool 
+		10 )	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/containers/bfe2305d5b31/logs | python -mjson.tool 
 			press_enter
 			;;
 		11 )	curl -s -X GET -H 'Accept: application/json' http://localhost:8080/images | python -mjson.tool
