@@ -37,27 +37,27 @@ until [ "$selection" = "0" ]; do
 			;;
 		3  ) 	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers?state=running | python -mjson.tool
 			;;
-		4  ) 	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<id> | python -mjson.tool
+		4  ) 	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/id | python -mjson.tool
 			;;
-		5  ) 	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<contID> | python -mjson.tool
+		5  ) 	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/contid | python -mjson.tool
 			;;
 		6  ) 	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel | python -mjson.tool
 			;;
-		7  ) 	curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080 -d '{"image": "<imgID>"}' | python -mjson.tool
+		7  ) 	curl -X POST -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080 -d '{"image": "imgID"}' | python -mjson.tool
 			;;
 		8  )	curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "running"}'
 			;;
 		9  ) 	curl -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/b6cd8ea512c8 -d '{"state": "stopped"}'
 			;;
-		10 )	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/<id>/logs | python -mjson.tool 
+		10 )	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containers/id/logs | python -mjson.tool 
 			;;
 		11 )	curl -s -X GET -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
 			;;
-		12 )	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/<imgID> | python -mjson.tool
+		12 )	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/imgID | python -mjson.tool
 			;;
 		13 )	curl -s -X DELETE -H 'Accept: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/containersDel | python -mjson.tool
 			;;
-		14 )	curl -s -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/<id> -d '{"tag": "test:1.0"}'
+		14 )	curl -s -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/id -d '{"tag": "test:1.0"}'
 			;;
 		15 )
 			;;
