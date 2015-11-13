@@ -59,7 +59,7 @@ until [ "$selection" = "0" ]; do
 			;;
 		14 )	curl -s -X PATCH -H 'Content-Type: application/json' http://snf-35216.vm.okeanos-global.grnet.gr:8080/images/id -d '{"tag": "test:1.0"}'
 			;;
-		15 )
+		15 )	curl -H 'Accept: application/json' -F file=@Dockerfile http://snf-35216.vm.okeanos-global.grnet.gr:8080/images | python -mjson.tool
 			;;
 		99) exit
 			;;
