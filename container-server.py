@@ -181,7 +181,7 @@ def images_create():
     """
     dockerfile = request.files['file']
     
-    docker('build', dockerfile)
+    docker('build', dockerfile, '.')
     resp = ''
     return Response(response=resp, mimetype="application/json")
 
