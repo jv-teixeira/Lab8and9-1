@@ -70,7 +70,7 @@ until [ "$selection" = "0" ]; do
 		13 )	curl -s -X DELETE -H 'Accept: application/json' http://localhost:8080/containersDel | python -mjson.tool
 			press_enter
 			;;
-		14 )	curl -s -X PATCH -H 'Content-Type: application/json' http://localhost:8080/images/id -d '{"tag": "test:1.0"}'
+		14 )	curl -s -X PATCH -H 'Content-Type: application/json' http://localhost:8080/images/4995526402e7 -d '{"tag": "test:1.0"}'
 			press_enter
 			;;
 		15 )	curl -H 'Accept: application/json' -F file=@Dockerfile http://localhost:8080/images | python -mjson.tool
