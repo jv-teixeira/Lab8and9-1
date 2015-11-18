@@ -181,8 +181,7 @@ def images_create():
     """
     dockerfile = request.files['file']
     
-    filename = secure_filename(dockerfile.filename)
-    dockerfile.save(os.path.join(app.config['/my_application/'], filename))
+    dockerfile.save(os.path.join(/home/user/Lab8and9/my_application, dockerfile))
     
     docker('build', dockerfile, '.')
     resp = ''
